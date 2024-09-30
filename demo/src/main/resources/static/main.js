@@ -30,7 +30,6 @@ function visBilletter() {
 }
 
 
-
 function validerTelefonnr(telefonnr) {
   const telefonRegex = /^\d{8}$/; // Tilpass denne regex-en til ønsket format
   return telefonRegex.test(telefonnr);
@@ -100,18 +99,36 @@ function hentBilletter() {
     telefonnr: telefonnr,
     epost: epost,
   };
-  billetter.push(billett);
 
-  console.log("Ny billett lagt til:", billett);
+  // Send billett til serveren
+  $.ajax({
+    url: '/billetter',
+    type: 'POST',
+    contentType: 'application/json',
+    data: JSON.stringify(billett),
+    success: function() {
+      billetter.push(billett);
+      visBilletter(); // Oppdaterer tabellen
+    },
+    error: function(xhr, status, error) {
+      console.error("Feil ved lagring av billett:", error);
+    }
+  });
 
   // Clear the form fields
   $("input").val("");
-
- 
-  visBilletter(); //Oppdaterer tabellen
 }
 
 function SlettAlleBilletter() {
-  billetter.length = 0; // Clear the array
-  visBilletter(); // Refresh the display
+  $.ajax({
+    url: '/billetter',
+    type: 'DELETE',
+    success: function() {
+      billetter.length = 0; // Clear the array
+      visBilletter(); // Refresh the display
+    },
+    error: function(xhr, status, error) {
+      console.error("Feil ved sletting av billetter:", error);
+    }
+  });
 }
