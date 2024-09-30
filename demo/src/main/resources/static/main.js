@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 $("#kjop-knapp").on("click", hentBilletter);
 $("#slett-alle").on("click", SlettAlleBilletter);
