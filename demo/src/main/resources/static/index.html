@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kinobilletter</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="main.js" defer></script>
+  </head>
+  <body>
+    <h1>Bestilling av kinobilletter</h1>
+    <form>
+      <label for="velg-film">Velg film:</label>
+      <select name="velg-film" id="velg-film">
+        <option value="" disabled selected>Velg film her</option>
+        <option value="Barbie">Barbie</option>
+        <option value="Oppenheimer">Oppenheimer</option>
+        <option value="Mission-Impossible-5">Mission Impossible 5</option>
+      </select>
+      <span id="film-feil" class="feilmelding1" style="color: red"></span><br /><br>
+
+      <label for="antall">Antall</label>
+      <input type="number" id="antall" />
+      <span id="antall-feil" class="feilmelding2" style="color: red"></span><br /><br>
+
+      <label for="fnavn">Fornavn</label>
+      <input type="text" id="fnavn" />
+      <span id="fnavn-feil" class="feilmelding3" style="color: red"></span><br><br />
+
+      <label for="enavn">Etternavn</label>
+      <input type="text" id="enavn" />
+      <span id="enavn-feil" class="feilmelding4" style="color: red"></span><br><br>
+
+      <label for="telefonnr">Telefonnr</label>
+      <input type="text" id="telefonnr">
+      <span id="telefonnr-feil" class="feilmelding5" style="color: red"></span><br> <br />
+
+      <label for="epost">Epost</label>
+      <input type="email" id="epost" />
+      <span id="epost-feil" class="feilmelding6" style="color: red"></span><br><br />
+      <input type="button" value="Kjøp billetter" id="kjop-knapp" />
+    </form>
+    <div>
+      <h1>Alle Billetter</h1>
+      <div id="billetter"></div>
+      <button id="slett-alle">Slett alle billettene</button>
+      
+    </div>
+  </body>
+</html>
