@@ -1,8 +1,4 @@
-/* Gammel kode: document.getElementById("kjop-knapp").addEventListener("click", hentBilletter);
-document
-  .getElementById("slett-alle")
-  .addEventListener("click", SlettAlleBilletter);
-  */
+
 $("#kjop-knapp").on("click", hentBilletter);
 $("#slett-alle").on("click", SlettAlleBilletter);
 
@@ -33,7 +29,7 @@ function visBilletter() {
   $("#billetter").html(ut);
 }
 
-// Gammel kode: document.getElementById("billetter").innerHTML = ut;
+
 
 function validerTelefonnr(telefonnr) {
   const telefonRegex = /^\d{8}$/; // Tilpass denne regex-en til ønsket format
@@ -75,12 +71,6 @@ function hentBilletter() {
     return;
   }
 
-  /* Gammel kode: const film = document.getElementById("velg-film").value;
-    const antall = document.getElementById("antall").value;
-    const fornavn = document.getElementById("fnavn").value;
-    const etternavn = document.getElementById("enavn").value;
-    const telefonnr = document.getElementById("telefonnr").value;
-    const epost = document.getElementById("epost").value; */
 
   const film = $("#velg-film").val();
   const antall = $("#antall").val();
@@ -89,19 +79,7 @@ function hentBilletter() {
   const telefonnr = $("#telefonnr").val();
   const epost = $("#epost").val();
 
-  /*
-     // Generell validering for tomme felter
-     if (!film || !antall || !fornavn || !etternavn || !telefonnr || !epost) {
-        if (!film) document.getElementById("film-feil").textContent = "Vennligst velg en film.";
-        if (!antall) document.getElementById("antall-feil").textContent = "Vennligst oppgi antall.";
-        if (!fornavn) document.getElementById("fnavn-feil").textContent = "Vennligst oppgi fornavn.";
-        if (!etternavn) document.getElementById("enavn-feil").textContent = "Vennligst oppgi etternavn.";
-        if (!telefonnr) document.getElementById("telefonnr-feil").textContent = "Vennligst oppgi telefonnummer.";
-        if (!epost) document.getElementById("epost-feil").textContent = "Vennligst oppgi e-post.";
-        return;
-
-    }
-        */
+  
 
   // Spesifikke valideringer
   if (!validerTelefonnr(telefonnr)) {
@@ -129,16 +107,7 @@ function hentBilletter() {
   // Clear the form fields
   $("input").val("");
 
-  // Clear the form fields
-  /*
-    document.getElementById("velg-film").value = "";
-    document.getElementById("antall").value = "";
-    document.getElementById("fnavn").value = "";
-    document.getElementById("enavn").value = "";
-    document.getElementById("telefonnr").value = "";
-    document.getElementById("epost").value = "";
-*/
-
+ 
   visBilletter(); //Oppdaterer tabellen
 }
 
