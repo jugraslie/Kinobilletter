@@ -1,4 +1,3 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 $("#kjop-knapp").on("click", hentBilletter);
 $("#slett-alle").on("click", SlettAlleBilletter);
@@ -7,9 +6,10 @@ const billetter = [];
 
 function visBilletter() {
   let ut =
-    "<table><tr>" +
+    "<table class='table table-striped'>" + // Legger til Bootstrap-klasser for tabellen
+    "<thead><tr>" +
     "<th>Film</th><th>Antall</th><th>Fornavn</th><th>Etternavn</th><th>Telefonnr</th><th>Epost</th>" +
-    "</tr>";
+    "</tr></thead><tbody>"; // Bruker thead og tbody for tabellen
 
   console.log("Billetter:", billetter);
 
@@ -23,13 +23,12 @@ function visBilletter() {
     ut += "<td>" + b.epost + "</td>";
     ut += "</tr>";
   }
-  ut += "</table>";
+  ut += "</tbody></table>"; // Avslutter tbody og tabellen
 
   console.log("Tabellinnhold:", ut);
 
   $("#billetter").html(ut);
 }
-
 
 function validerTelefonnr(telefonnr) {
   const telefonRegex = /^\d{8}$/; // Tilpass denne regex-en til ønsket format
@@ -47,30 +46,29 @@ function hentBilletter() {
   $(".feilmelding").text("");
 
   if ($("#velg-film").val() === null) {
-    $(".feilmelding1").text("Vennligst velg en film");
+    $(".feilmelding1").text("Vennligst velg en film").addClass("alert alert-danger");
     return;
   }
   if ($("#antall").val() === "") {
-    $(".feilmelding2").text("Vennligst velg antall billetter");
+    $(".feilmelding2").text("Vennligst velg antall billetter").addClass("alert alert-danger");
     return;
   }
   if ($("#fnavn").val() === "") {
-    $(".feilmelding3").text("Vennligst skriv inn fornavn");
+    $(".feilmelding3").text("Vennligst skriv inn fornavn").addClass("alert alert-danger");
     return;
   }
   if ($("#enavn").val() === "") {
-    $(".feilmelding4").text("Vennligst skriv inn etternavn");
+    $(".feilmelding4").text("Vennligst skriv inn etternavn").addClass("alert alert-danger");
     return;
   }
   if ($("#telefonnr").val() === "") {
-    $(".feilmelding5").text("Vennligst skriv inn et telefonnr");
+    $(".feilmelding5").text("Vennligst skriv inn et telefonnr").addClass("alert alert-danger");
     return;
   }
   if ($("#epost").val() === "") {
-    $(".feilmelding6").text("Vennligst skriv inn en epost");
+    $(".feilmelding6").text("Vennligst skriv inn en epost").addClass("alert alert-danger");
     return;
   }
-
 
   const film = $("#velg-film").val();
   const antall = $("#antall").val();
@@ -79,16 +77,14 @@ function hentBilletter() {
   const telefonnr = $("#telefonnr").val();
   const epost = $("#epost").val();
 
-  
-
   // Spesifikke valideringer
   if (!validerTelefonnr(telefonnr)) {
-    $("#telefonnr-feil").text("Vennligst skriv inn et gyldig telefonnummer.");
+    $("#telefonnr-feil").text("Vennligst skriv inn et gyldig telefonnummer.").addClass("alert alert-danger");
     return;
   }
 
   if (!validerEpost(epost)) {
-    $("#epost-feil").text("Vennligst skriv inn en gyldig e-postadresse.");
+    $("#epost-feil").text("Vennligst skriv inn en gyldig e-postadresse.").addClass("alert alert-danger");
     return;
   }
 
@@ -116,7 +112,7 @@ function hentBilletter() {
     }
   });
 
-  // Clear the form fields
+  // Tøm skjemaet
   $("input").val("");
 }
 
@@ -125,8 +121,8 @@ function SlettAlleBilletter() {
     url: '/billetter',
     type: 'DELETE',
     success: function() {
-      billetter.length = 0; // Clear the array
-      visBilletter(); // Refresh the display
+      billetter.length = 0; // Tømmer arrayet
+      visBilletter(); // Oppdaterer visningen
     },
     error: function(xhr, status, error) {
       console.error("Feil ved sletting av billetter:", error);
